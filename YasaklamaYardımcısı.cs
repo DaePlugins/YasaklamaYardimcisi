@@ -1,21 +1,20 @@
-﻿using System.Reflection;
-using Rocket.API.Collections;
+﻿using Rocket.API.Collections;
 using Rocket.Core.Plugins;
-using Harmony;
+using HarmonyLib;
 
 namespace DaeYasaklamaYardimcisi
 {
     public class YasaklamaYardımcısı : RocketPlugin<YasaklamaYardımcısıYapılandırma>
     {
         public static YasaklamaYardımcısı Örnek { get; private set; }
-        private HarmonyInstance _harmony;
+        private Harmony _harmony;
 
         protected override void Load()
         {
             Örnek = this;
 
-            _harmony = HarmonyInstance.Create("dae.yasaklamayardimcisi");
-            _harmony.PatchAll(Assembly.GetExecutingAssembly());
+            _harmony = new Harmony("dae.yasaklamayardimcisi");
+            _harmony.PatchAll();
         }
 
         protected override void Unload()
